@@ -27,3 +27,18 @@ console.log(`origin: `, numbers);
 console.log(numbers.slice(3)); // slice(3) 3번부터 끝까지
 console.log(numbers.slice()); // 전체복사
 
+console.log('=========================');
+
+// splice() : 배열의 요소를 추가하거나 삭제 (중간에서 작업 가능)
+// 배열의 원본을 건드림.
+
+console.log(foods);
+
+foods.splice(2, 1); // 앞에는 인덱스 뒤에는 지우는 갯수
+console.log(foods);
+
+foods.splice(0,1, '마라탕');
+console.log(foods);
+
+foods.splice(2, 0, '짜장면', '차돌짬뽕');
+console.log(foods);
