@@ -39,24 +39,22 @@ let userInfo = {
 
 
 while (true) {
-    let inputId = prompt("아이디를 입력하세요:");
-    let foundUser = null;
+    let inputName = prompt("아이디를 입력하세요:");
+    let findUser = null;
 
     for (let i = 0; i < userInfo.userList.length; i++) {
-        if (userInfo.userList[i].account === inputId) {
-            foundUser = userInfo.userList[i];
+        if (userInfo.userList[i].account === inputName) {
+            findUser = userInfo.userList[i];
             break;
         }
     }
-    if (foundUser === null) {
+    if (findUser === null) {
         alert("존재하지 않는 회원입니다.");
         continue;
     }
-
     let inputPw = prompt("비밀번호를 입력하세요:");
-
-    if (inputPw === foundUser.password) {
-        alert("로그인 성공! 어서오세요, " + foundUser.username + "님!");
+    if (inputPw === findUser.password) {
+        alert("로그인 성공! 어서오세요, " + findUser.username + "님!");
         break;
     } else {
         alert("비밀번호가 틀렸습니다.");
