@@ -33,13 +33,18 @@ let userInfo = {
             password: 'hhh1234',
             username: '홍길동',
         },
-
+        {
+            account: 'heartping',
+            password: 'hhh9999',
+            username: '하츄핑',
+        },
     ],
 };
 
+/*
 
 while (true) {
-    let inputName = prompt("아이디를 입력하세요:");
+    let inputName = prompt('아이디를 입력하세요:');
     let findUser = null;
 
     for (let i = 0; i < userInfo.userList.length; i++) {
@@ -49,14 +54,50 @@ while (true) {
         }
     }
     if (findUser === null) {
-        alert("존재하지 않는 회원입니다.");
+        alert('존재하지 않는 회원입니다.');
         continue;
     }
-    let inputPw = prompt("비밀번호를 입력하세요:");
+    let inputPw = prompt('비밀번호를 입력하세요:');
     if (inputPw === findUser.password) {
-        alert("로그인 성공! 어서오세요, " + findUser.username + "님!");
+        alert('로그인 성공! 어서오세요, ' + findUser.username + '님');
         break;
     } else {
-        alert("비밀번호가 틀렸습니다.");
+        alert('비밀번호가 틀렸습니다.');
+    }
+}
+*/
+
+
+while (true) {
+
+// 로그인 로직
+// 사용자가 입력한 계정명으로 해당 계정데이터를 찾아내기
+    let inputAccount = prompt('계정을 입력하세요!');
+
+    let flag = false;
+    let currentUser = null; // 발견된 유저를 백업할 변수
+
+    for (let user of userInfo.userList) {
+        if (inputAccount === user.account) {
+            // console.log('가입된 계정입니다.');
+            currentUser = user;
+            break;
+        }
+    }
+
+    if (!currentUser) {
+        alert('회원가입된 계정이 아닙니다.');
+        continue;
+    }
+
+// 사용자가 입력한 패스워드
+    let inputPassword = prompt('비밀번호를 입력하세요!');
+
+// 비번체크
+    if (inputPassword === currentUser.password) {
+        alert(`${currentUser.username}님 로그인 성공!`);
+        break;
+    } else {
+        alert('비밀번호가 틀렸습니다.');
     }
 }
