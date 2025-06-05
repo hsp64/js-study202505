@@ -62,16 +62,6 @@ function mapByUser(callback) {
     return mappedArray;
 }
 
-// 아무 목록에서 특정 데이터만 모두 추출해서 새배열로 줘!
-function map(array, callback) {
-    const mappedArray = [];
-    for (const element of array) {
-        const item = callback(element);
-        mappedArray.push(item);
-    }
-    return mappedArray;
-}
-
 const map1 = mapByUserJobs();
 console.log(map1);
 
@@ -97,19 +87,17 @@ const map4 = mapByUser(user => ({
 console.log(map4);
 
 
-const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+// 아무 목록에서 특정 데이터만 모두 추출해서 새배열로 줘!
+function map(array, callback) {
+    const mappedArray = [];
+    for (const element of array) {
+        const element = callback(user);
+        mappedArray.push(element);
+    }
+    return mappedArray;
+}
+
+const numbers = [1,2,3,4,5,6,7,8,9];
 const names = ['홍길동', '김철수', '김뽀삐', '이뚜뚜', '홍뽀로로', '박짜짜'];
 
-console.log('===================');
 const map5 = map(numbers, n => n ** 2);
-console.log(map5);
-
-console.log('===================');
-const map6 = map(names, name => name[0]);
-console.log(map6);
-
-console.log('===================');
-const map7 = map(userList, user => user.hobbies);
-console.log(map7);
-
-
