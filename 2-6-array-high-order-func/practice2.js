@@ -110,9 +110,17 @@ const countOfCityTrade = traders.reduce((acc, t) => {
 
 console.log(countOfCityTrade);
 
-const sorted = traders.sort((a,b) => a.value - b.value);
+console.log('=========================');
+
+const sorted = [...traders];
+
+sorted.sort((a,b) => a.value - b.value);
 
 console.log(sorted);
+
+console.log('=========================');
+// 원본
+// console.log(traders);
 
 // 1. **2023년에 대전에서 발생한 모든 거래의 총액을 계산해주세요.**
 
