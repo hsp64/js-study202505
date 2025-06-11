@@ -13,7 +13,27 @@
     <div id="warning" style="color: red; display: none;">유효하지 않은 색상입니다!</div>
 
     <script>
+        // 색상이 유효한지 판별하는 함수
+        function isValidColor(color) {
+            const testElement = new Option().style;
+            testElement.color = color;
+            return testElement.color !== '';
+        }
 
+        const $colorInput = document.getElementById('colorInput');
+        const $warning = document.getElementById('warning');
+
+        // 'input' 이벤트를 사용하여 실시간으로 감지
+        $colorInput.addEventListener('input', function () {
+            const value = $colorInput.value.trim();
+
+            if (isValidColor(value)) {
+                $warning.style.display = 'none';
+                document.body.style.background = value;
+            } else {
+                $warning.style.display = 'block';
+            }
+        });
     </script>
 </body>
 </html>
