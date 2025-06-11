@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Title</title>
+    <style>
+        #image {
+            width: 100px;
+            transition: width 0.3s;
+        }
+    </style>
+</head>
+<body>
+    <div class="btn-group">
+        <button id="increaseSize">이미지 크기 증가</button>
+        <button id="decreaseSize">이미지 크기 감소</button>
+    </div>
+    <img id="image" src="https://image.yes24.com/goods/105982287/XL" alt="이미지">
+
+    <script>
+        const $increaseSize = document.querySelector('#increaseSize');
+        const $decreaseSize = document.querySelector('#decreaseSize');
+        const $image = document.querySelector('#image');
+
+
+        // 이미지의 크기를 변수로 따로 관리
+        let currentWidth = 100;
+
+        const updateImageSize = () => {
+            $image.style.width = currentWidth + 'px';
+        };
+
+        const increaseHandler = () => {
+            currentWidth += 20;
+            updateImageSize();
+        };
+
+        const decreaseHandler = () => {
+            if (currentWidth > 40) {
+                currentWidth -= 20;
+                updateImageSize();
+            }
+        };
+
+        $increaseSize.onclick = increaseHandler;
+        $decreaseSize.onclick = decreaseHandler;
+
+    </script>
+
+</body>
+</html>

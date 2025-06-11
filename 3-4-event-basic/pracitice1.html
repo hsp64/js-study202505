@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Title</title>
+    <style>
+        #text {
+            font-size: 24px;
+            transition: 0.3s;
+        }
+    </style>
+</head>
+<body>
+    <div id="text">이 텍스트를 올려보세요.</div>
+
+    <script>
+        const $text = document.querySelector('#text');
+
+        // 마우스를 올렸을때 파란색 글씨
+        const hoverHandler = () => {
+            $text.style.color = 'blue';
+        }
+
+        // 마우스를 땠을 때 초기 상태
+        const removeHandler = () => {
+            $text.style.color = '';
+        }
+
+        $text.onmouseover = hoverHandler;
+        $text.onmouseout = removeHandler;
+
+
+    </script>
+</body>
+</html>
