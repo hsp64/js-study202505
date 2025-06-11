@@ -17,21 +17,14 @@
     <div id="text">이 텍스트를 올려보세요.</div>
 
     <script>
-        const $text = document.querySelector('#text');
+        const $text = document.getElementById('text');
 
-        // 마우스를 올렸을때 파란색 글씨
-        const hoverHandler = () => {
+        $text.addEventListener('mouseover', () => {
             $text.style.color = 'blue';
-        }
-
-        // 마우스를 땠을 때 초기 상태
-        const removeHandler = () => {
-            $text.style.color = '';
-        }
-
-        $text.onmouseover = hoverHandler;
-        $text.onmouseout = removeHandler;
-
+        });
+        $text.addEventListener('mouseout', () => {
+            $text.style.color = 'black';
+        });
 
     </script>
 </body>

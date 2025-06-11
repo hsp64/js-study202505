@@ -2,38 +2,32 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Title</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>실시간 배경색 변경</title>
 </head>
 <body>
+
     <input type="text" id="colorInput" placeholder="색상 이름이나 HEX 코드를 입력하세요">
     <div id="warning" style="color: red; display: none;">유효하지 않은 색상입니다!</div>
 
     <script>
-        // 색상이 유효한지 판별하는 함수
-        function isValidColor(color) {
-            const testElement = new Option().style;
-            testElement.color = color;
-            return testElement.color !== '';
-        }
 
         const $colorInput = document.getElementById('colorInput');
         const $warning = document.getElementById('warning');
 
-        // 'input' 이벤트를 사용하여 실시간으로 감지
-        $colorInput.addEventListener('input', function () {
-            const value = $colorInput.value.trim();
+        $colorInput.addEventListener('input', () => {
+            document.body.style.background = $colorInput.value;
+            // console.log($colorInput.value);
 
-            if (isValidColor(value)) {
-                $warning.style.display = 'none';
-                document.body.style.background = value;
+            // 정확한 색상을 입력하지 않으면
+            // style프로퍼티의 background프로퍼티가 빈문자열이다
+            if (document.body.style.background !== $colorInput.value) {
+                $warning.style.display = 'block'; // 에러메시지 보여주기
             } else {
-                $warning.style.display = 'block';
+                $warning.style.display = 'none'; // 에러메시지 숨기기
             }
         });
+
     </script>
 </body>
 </html>

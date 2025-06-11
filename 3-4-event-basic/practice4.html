@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
     <style>
         body {
             display: flex;
@@ -51,6 +51,7 @@
         }
     </style>
 </head>
+
 <body>
     <div id="slider">
         <button id="prev">이전</button>
@@ -64,9 +65,56 @@
         const images = [
             'https://blog.kakaocdn.net/dn/dN4uhe/btr8xWDwbrK/5YjBrelhtJwU2BAcLtEVoK/img.jpg',
             "https://www.sisajournal.com/news/photo/202108/222572_131065_5150.jpg",
-            'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8fA%3D%3D'
+            'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8fA%3D%3D',
+
         ];
+
+        // 요소 노드 취득
+        const [$prev, $image, $next]
+            = [...document.getElementById('slider').children];
+
+        // 현재 렌더링된 이미지가 배열에서 몇번인덱스의 이미지인지 체크할 변수
+        let currentIndex = 0;
+
+        // 지정된 이미지주소를 이미지태그에 넣어주는 함수
+        function insertImageSource(index) {
+            $image.setAttribute('src', images[index]);
+        }
+
+        // 이전 버튼 클릭이벤트
+        $prev.addEventListener('click', () => {
+
+            // 현재 인덱스 기준으로 1씩 감소  0 -> 2 -> 1 -> 0 -> 2 -> 1
+            /*currentIndex--;
+            // 인덱스 보정
+            if (currentIndex < 0) {
+              currentIndex = images.length - 1;
+            }*/
+
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+
+            // 실제 이미지 태그에 삽입
+            insertImageSource(currentIndex);
+        });
+        // 다음 버튼 클릭이벤트
+        $next.addEventListener('click', () => {
+            // 다음 버튼을 누르면 이미지태그의 src가
+            // 이미지배열의 다음 데이터로 바뀌어야 함
+            // 0번 -> 1 -> 2 -> 0 -> 1 -> 2
+
+            // 마지막 인덱스까지만 ++하고 마지막인덱스에서는 0으로 돌려야함.
+            /*currentIndex++;
+            if (currentIndex >= images.length) {
+              currentIndex = 0;
+            }*/
+
+            currentIndex = (currentIndex + 1) % images.length;
+
+            // 실제 이미지 태그에 삽입
+            insertImageSource(currentIndex);
+        });
 
     </script>
 </body>
+
 </html>
