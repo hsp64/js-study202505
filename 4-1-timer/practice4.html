@@ -151,7 +151,7 @@
       document.querySelector('.log-entry').innerHTML = '';
       // === 제목 원래대로 되돌리기 ===
       $logTitle.textContent = '일시정지 로그';
-
+      $logTitle.style.border = 'none';
     }
 
 
@@ -171,7 +171,6 @@
         } else { // 더 이상 <div>가 없으면 중단
           clearInterval(intervalId);
           $logTitle.textContent = '일시정지 로그';
-
         }
       }, 500);
     }
