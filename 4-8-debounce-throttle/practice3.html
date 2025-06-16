@@ -199,7 +199,7 @@
         // 이 곳에 JavaScript 코드를 작성하세요.
 
         //변수 설정
-        const $setUp = document.getElementById('panel-1');
+        const $setUp = document.querySelector('.setup-area');
         const $Arena = document.getElementById('arena-1');
         const $createBtn = document.getElementById('btn-create-1');
         const $att = document.getElementById('btn-attack-1');
@@ -226,7 +226,7 @@
         $createBtn.addEventListener("click", e => {
             createDragonFour();
             $Arena.classList = null;
-            // $setUp.classList = 'hidden';
+            $setUp.classList = 'hidden';
         });
 
         $att.addEventListener('click', e => {
