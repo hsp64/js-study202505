@@ -31,7 +31,44 @@
     </div>
 
     <script>
+        // 요소 선택
+        const $chocoCount = document.querySelector('.count1');
+        const $cheeseCount = document.querySelector('.count2');
 
+        const $decrease1 = document.getElementById('decrease1');
+        const $increase1 = document.getElementById('increase1');
+        const $decrease2 = document.getElementById('decrease2');
+        const $increase2 = document.getElementById('increase2');
+
+        // 카운트 클로저
+        function countClosure() {
+            let count = 0;
+            return {
+                increaseCount: () => ++count,
+                decreaseCount: () => --count
+            };
+        }
+
+        const chocoCounter = countClosure();
+        const cheeseCounter = countClosure();
+
+        // 이벤트 연결 - 초콜릿
+        $increase1.addEventListener('click', () => {
+            $chocoCount.textContent = chocoCounter.increaseCount();
+        });
+
+        $decrease1.addEventListener('click', () => {
+            $chocoCount.textContent = chocoCounter.decreaseCount();
+        });
+
+        // 이벤트 연결 - 치즈
+        $increase2.addEventListener('click', () => {
+            $cheeseCount.textContent = cheeseCounter.increaseCount();
+        });
+
+        $decrease2.addEventListener('click', () => {
+            $cheeseCount.textContent = cheeseCounter.decreaseCount();
+        });
     </script>
 </body>
 </html>
