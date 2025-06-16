@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS 클로저 - 독립적인 조절기</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #eef1f5;
+            padding: 20px;
+        }
+        .wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px; /* 두 조절기 사이의 간격 */
+        }
+        .container {
+            width: 40%;
+            padding: 30px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        h2 {
+            margin-top: 0;
+            color: #333;
+        }
+        .target-text {
+            color: #333;
+            transition: font-size 0.2s ease-in-out;
+            margin-bottom: 30px;
+            min-height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #text-1 { font-size: 16px; }
+        #text-2 { font-size: 20px; }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+        .btn {
+            width: 50px;
+            height: 50px;
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            background-color: #007bff;
+            transition: background-color 0.2s;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .size-display {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            min-width: 70px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="wrapper">
+
+        <div class="container">
+            <h2>조절기 1</h2>
+            <p id="text-1" class="target-text">첫 번째 텍스트입니다.</p>
+            <div class="controls">
+                <button id="btn-decrease-1" class="btn">-</button>
+                <div id="size-display-1" class="size-display">16px</div>
+                <button id="btn-increase-1" class="btn">+</button>
+            </div>
+        </div>
+
+        <div class="container">
+            <h2>조절기 2</h2>
+            <p id="text-2" class="target-text">두 번째 텍스트입니다.</p>
+            <div class="controls">
+                <button id="btn-decrease-2" class="btn">-</button>
+                <div id="size-display-2" class="size-display">20px</div>
+                <button id="btn-increase-2" class="btn">+</button>
+            </div>
+        </div>
+
+        <div class="container">
+            <h2>조절기 3</h2>
+            <p id="text-3" class="target-text">세 번째 텍스트입니다.</p>
+            <div class="controls">
+                <button id="btn-decrease-3" class="btn">-</button>
+                <div id="size-display-3" class="size-display">24px</div>
+                <button id="btn-increase-3" class="btn">+</button>
+            </div>
+        </div>
+
+        <div class="container">
+            <h2>조절기 4</h2>
+            <p id="text-4" class="target-text">네 번째 텍스트입니다.</p>
+            <div class="controls">
+                <button id="btn-decrease-4" class="btn">-</button>
+                <div id="size-display-4" class="size-display">10px</div>
+                <button id="btn-increase-4" class="btn">+</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // 폰트크기를 독립적으로 조절해주는 클로저 정의
+        function createFontSizer(initialSize) {
+            let size = initialSize;
+            return {
+                increment: () => ++size,
+                decrement: () => {
+                    if (size > 6) {
+                        size--;
+                    }
+                    return size;
+                }
+            };
+        }
+
+        // 조절기 세팅 함수
+        function initSizerPanel(sizerId, initialSize) {
+            // 조절기 노드 가져오기
+            const $text = document.getElementById(`text-${sizerId}`); // p태그
+            const $display = document.getElementById(`size-display-${sizerId}`);
+            const $incBtn = document.getElementById(`btn-increase-${sizerId}`);
+            const $decBtn = document.getElementById(`btn-decrease-${sizerId}`);
+
+            // 초기 폰트사이즈를 텍스트박스에 적용해놓기
+            $text.style.fontSize = `${initialSize}px`;
+
+            // 클로저를 호출해서 첫번째 조절기의 폰트사이즈를 제어하는 함수
+            const { increment, decrement } = createFontSizer(initialSize);
+
+            $incBtn.addEventListener('click', e => {
+                // 새로운 증가된 폰트사이즈 가져오기
+                const newSize = increment();
+                $text.style.fontSize = `${newSize}px`;
+                $display.textContent = `${newSize}px`;
+            });
+            $decBtn.addEventListener('click', e => {
+                // 새로운 감소된 폰트사이즈 가져오기
+                const newSize = decrement();
+                $text.style.fontSize = `${newSize}px`;
+                $display.textContent = `${newSize}px`;
+            });
+        }
+
+        // 묶음데이터를 객체 배열로 저장
+        const sizerPanelArray = [
+            {
+                id: 1,
+                initFontSize: 16
+            },
+            {
+                id: 2,
+                initFontSize: 20
+            },
+            {
+                id: 3,
+                initFontSize: 24
+            },
+            {
+                id: 4,
+                initFontSize: 10
+            },
+        ];
+
+        sizerPanelArray.forEach(panel => initSizerPanel(panel.id, panel.initFontSize));
+    </script>
+
+</body>
+</html>
+
+
+/*        // 조절기 1 세팅
+        const $sizer1_text = document.getElementById('text-1'); // p태그
+        const $sizer1_display = document.getElementById('size-display-1');
+        const $sizer1_incBtn = document.getElementById('btn-increase-1');
+        const $sizer1_decBtn = document.getElementById('btn-decrease-1');
+
+        // 클로저를 호출해서 첫번째 조절기의 폰트사이즈를 제어하는 함수
+        const { increment: inc1, decrement: dec1 } = createFontSizer(16);
+
+        $sizer1_incBtn.addEventListener('click', e => {
+            // 새로운 증가된 폰트사이즈 가져오기
+            const newSize = inc1();
+            $sizer1_text.style.fontSize = `${newSize}px`;
+            $sizer1_display.textContent = `${newSize}px`;
+        });
+        $sizer1_decBtn.addEventListener('click', e => {
+            // 새로운 감소된 폰트사이즈 가져오기
+            const newSize = dec1();
+            $sizer1_text.style.fontSize = `${newSize}px`;
+            $sizer1_display.textContent = `${newSize}px`;
+        });
+
+        // 조절기 2 세팅
+        const $sizer2_text = document.getElementById('text-2'); // p태그
+        const $sizer2_display = document.getElementById('size-display-2');
+        const $sizer2_incBtn = document.getElementById('btn-increase-2');
+        const $sizer2_decBtn = document.getElementById('btn-decrease-2');
+
+        // 클로저를 호출해서 두번째 조절기의 폰트사이즈를 제어하는 함수
+        const { increment: inc2, decrement: dec2 } = createFontSizer(20);
+
+        $sizer2_incBtn.addEventListener('click', e => {
+            // 새로운 증가된 폰트사이즈 가져오기
+            const newSize = inc2();
+            $sizer2_text.style.fontSize = `${newSize}px`;
+            $sizer2_display.textContent = `${newSize}px`;
+        });
+        $sizer2_decBtn.addEventListener('click', e => {
+            // 새로운 감소된 폰트사이즈 가져오기
+            const newSize = dec2();
+            $sizer2_text.style.fontSize = `${newSize}px`;
+            $sizer2_display.textContent = `${newSize}px`;
+        });*/
