@@ -6,6 +6,17 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <style>
+        .post-item {
+            padding: 10px 20px;
+            border: 2px solid gray;
+            border-radius: 15px;
+            font-size: 20px;
+            box-sizing: border-box;
+            box-shadow: 2px 2px 5px black;
+            margin: 10px auto;
+        }
+    </style>
 </head>
 <body>
     <h1>서버에서 데이터 가져오기</h1>
@@ -44,7 +55,34 @@
             // 서버에서 응답이 옴
             xhr.addEventListener('load', e => {
                 const response = xhr.responseText;
-                console.log(response);
+                // console.log(typeof response);
+                // console.log(response);
+
+                /*
+                    JSON : 자바스크립트 객체 표기법
+                    JSON !== JS
+
+                    서버가 사용한 언어는 서버마다 다름
+                    클라이언트도 사용하는 언어가 다름
+
+                    언어마다 JSON을 특정언어로 변환하는 기능을 내장하고 있음
+
+                    JSON -> : JSON.parse()
+                    js -> : json.stringify()
+
+                 */
+
+                const responseData = JSON.parse(response);
+                // console.log(responseData);
+
+                response.forEach(res => {
+                    // 태그에 감싸서 렌더링
+                    const $div = document.createElement('div');
+                    $div.textContent = `제목: ${res.title}`
+                    $div.classList.add('post-item');
+
+                    $output.append($div);
+                });
             });
 
 
