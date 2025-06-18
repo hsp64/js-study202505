@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>서버에서 데이터 가져오기</h1>
+    <button id="fetchData">데이터 가져오기</button>
+    <p id="output"></p>
+
+    <script>
+        const $btn = document.getElementById('fetchData');
+        const $output = document.getElementById('output');
+
+        $btn.addEventListener('click', e => {
+            // 서버와 통신 시작
+
+            // 서버 주소 (식당 위치)
+            const url = `https://jsonplaceHolder.typicode.com`;
+
+            //원하는 리로스 (그 식당의 음식메뉴)
+            const resource = '/posts'; // 서버에 저장된 게시물
+
+            // 서버와의 통신을 중개해주는 대행 객체
+            const xhr = new XMLHttpRequest();
+
+            // 요청 시작 (식당에 주문)
+            /*
+                데이터 요청시 사용하는 방식 4가지
+                1. GET : 조회
+                2. POST : 생성
+                3. PUT/PATCH : 수정
+                4. DELETE : 삭제
+             */
+            xhr.open('GET', `${url}${resource}`);
+
+            // 요청 실제로 전송
+            xhr.send();
+
+            // 서버에서 응답이 옴
+            xhr.addEventListener('load', e => {
+                const response = xhr.responseText;
+                console.log(response);
+            });
+
+
+        });
+
+    </script>
+</body>
+</html>
