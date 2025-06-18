@@ -11,25 +11,6 @@
 </head>
 <body>
 
-
-
-    <div class="setup-container">
-        <h1 class="main-title">UP & DOWN 탐정 게임</h1>
-        <div class="difficulty-selector">
-            <label for="difficulty">난이도 선택:</label>
-            <select id="difficulty">
-                <option value="easy">쉬움 (1-50, 기회 8번)</option>
-                <option value="normal" selected>보통 (1-100, 기회 10번)</option>
-                <option value="hard">어려움 (1-200, 기회 10번)</option>
-            </select>
-        </div>
-        <button id="start-game-button">게임 시작!</button>
-    </div>
-
-    <div class="game-container hidden">
-
-    </div>
-
     <div class="game-container">
 
         <header class="game-header">
@@ -38,15 +19,6 @@
                 <div class="range-info">
                     범위: <span id="begin">1</span> ~ <span id="end">100</span>
                 </div>
-
-                // 타이머
-<!--                <div class="range-info">...</div>-->
-
-<!--                <div class="timer-info">-->
-<!--                    남은 시간: <span id="timer">60</span>초-->
-<!--                </div>-->
-
-                <div class="chances-info">...</div>
                 <div class="chances-info">
                     남은 기회: <span id="chances-left">10</span>회
                 </div>
@@ -56,7 +28,11 @@
         <main class="game-main">
             <form id="guess-form" class="guess-form" novalidate>
                 <input type="number" id="guess-input" min="1" max="100" placeholder="숫자를 입력하세요..." required>
-                <button type="submit" class="guess-button">도전!</button>
+                <div class="btn-group">
+                    <button type="submit" class="guess-button">도전!</button>
+                    <button type="button" id="hint-button" class="hint-button">💡 힌트</button>
+                    <button type="button" id="give-up-button" class="give-up-button">🏳️ 포기</button>
+                </div>
             </form>
 
             <div class="feedback">

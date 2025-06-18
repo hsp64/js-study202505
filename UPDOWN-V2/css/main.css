@@ -27,38 +27,7 @@ body {
     min-height: 100vh;
     margin: 0;
 }
-/* main.css 파일에 아래 내용 추가 */
-.setup-container {
-    background: white;
-    padding: 40px;
-    border-radius: 16px;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
-    text-align: center;
-}
-.difficulty-selector {
-    margin: 20px 0;
-    font-size: 18px;
-}
-.difficulty-selector select {
-    padding: 8px;
-    font-size: 16px;
-    margin-left: 10px;
-    border-radius: 8px;
-    border: 2px solid var(--gray);
-}
-#start-game-button {
-    padding: 15px 40px;
-    font-size: 20px;
-    font-weight: 700;
-    background-color: var(--success-color);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-}
-.hidden {
-    display: none;
-}
+
 /* --- 2. 게임 컨테이너 레이아웃 --- */
 .game-container {
     width: 100%;
@@ -101,6 +70,7 @@ body {
 /* --- 4. 메인 게임 영역 (입력, 피드백, 기록) --- */
 .guess-form {
     display: flex;
+    flex-direction: column;
     gap: 10px;
 }
 
@@ -125,6 +95,13 @@ body {
     margin: 0;
 }
 
+
+.btn-group {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
 .guess-button {
     padding: 12px 25px;
     font-size: 18px;
@@ -135,6 +112,31 @@ body {
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.2s;
+}
+
+.hint-button {
+    padding: 12px 15px;
+    font-size: 18px;
+    font-weight: 700;
+    background-color: #ffc107; /* 힌트를 의미하는 노란색 */
+    color: #333;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    flex-shrink: 0; /* 버튼이 찌그러지지 않도록 */
+}
+
+
+.give-up-button {
+    padding: 12px 15px;
+    font-size: 18px;
+    font-weight: 700;
+    background-color: var(--dark-gray);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    flex-shrink: 0;
 }
 
 .guess-button:hover {
